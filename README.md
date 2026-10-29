@@ -43,14 +43,21 @@ dan ditampilkan di halaman `/demo`.
 
 ## Menjalankan lokal
 
+Butuh PHP 8.2+ (ekstensi `pdo_sqlite` wajib) dan Composer. Node/npm cuma perlu kalau mau
+mengubah aset front-end — `public/build` sudah ikut di repo, jadi `npm run build` opsional.
+
 ```bash
 cp .env.example .env
 php artisan key:generate
-touch database/demo.sqlite
+touch database/database.sqlite
 php artisan migrate:fresh --seed
 php artisan storage:link
 php artisan serve
 ```
+
+`DB_DATABASE` di `.env.example` sengaja dikosongkan supaya lokal memakai bawaan Laravel
+(`database/database.sqlite`). Di Docker, `docker/entrypoint.sh` yang mengisi path
+`/var/www/html/database/demo.sqlite`.
 
 Atau lewat Docker (sama seperti yang dipakai di VPS):
 
