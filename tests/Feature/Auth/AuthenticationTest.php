@@ -27,7 +27,8 @@ class AuthenticationTest extends TestCase
         ]);
 
         $this->assertAuthenticated();
-        $response->assertRedirect(route('dashboard', absolute: false));
+        // Login diarahkan per peran; akun tanpa peran khusus masuk ke dashboard dosen.
+        $response->assertRedirect(route('dashboard.index', absolute: false));
     }
 
     public function test_users_can_not_authenticate_with_invalid_password(): void
